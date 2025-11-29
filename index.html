@@ -38,7 +38,7 @@
         body {
             background: 
                 linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-                url('yeababy.png') no-repeat center center fixed;
+                url('yeababy.jpg') no-repeat center center fixed;
             background-size: cover;
             color: var(--light);
             line-height: 1.6;
@@ -957,6 +957,93 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);            
         }
         
+        /* Selector de fecha para historial de pagos */
+        .date-selector-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .date-selector-label {
+            font-weight: 600;
+            color: var(--light);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .date-selector {
+            padding: 8px 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--light);
+        }
+        
+        .date-navigation {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .date-nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .date-nav-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .date-display {
+            font-weight: 600;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Estilos para agregar días adicionales a clientes semanales */
+        .add-days-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .add-days-form {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .add-days-input {
+            flex: 1;
+        }
+        
+        .days-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .days-remaining {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .days-used {
+            color: var(--warning);
+            font-weight: bold;
+        }
+        
         /* Animaciones suaves */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -1000,6 +1087,15 @@
             .header-top {
                 flex-direction: column;
                 gap: 10px;
+            }
+            
+            .date-selector-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .add-days-form {
+                flex-direction: column;
             }
         }
     </style>
@@ -1149,10 +1245,19 @@
                                 <option value="3">3 días</option>
                                 <option value="4">4 días</option>
                                 <option value="5">5 días</option>
-                                <option value="5">5 días</option>
-                                <option value="5">5 días</option>
                                 <option value="6">6 días</option>
                                 <option value="7">7 días</option>
+<option value=" 8">8 días</option> 
+<option value=" 9">9 días</option> 
+<option value=" 10">10 días</option> 
+<option value=" 11">11 días</option> 
+<option value="12">12 días</option> <option value=" 15">15 días</option> 
+<option value=" 20">20 días</option>
+<option value=" 21">21 días</option> 
+<option value=" 22">22 días</option>
+<option value=" 23">23 días</option>
+<option value=" 24">24 días</option>
+<option value=" 30">30 días</option>
                             </select>
                             
                             <label for="weekly-start-date"><i class="fas fa-calendar-plus"></i> Fecha de Inicio</label>
@@ -1200,6 +1305,24 @@
                         <select id="attendance-client" required>
                             <option value="">Seleccionar cliente</option>
                         </select>
+                    </div>
+                    
+                    <!-- Sección para agregar días adicionales a clientes semanales -->
+                    <div id="add-days-section" class="add-days-container" style="display: none;">
+                        <h3><i class="fas fa-calendar-plus"></i> Agregar Días Adicionales</h3>
+                        <div class="days-info">
+                            <span>Días usados: <span id="days-used" class="days-used">0</span></span>
+                            <span>Días restantes: <span id="days-remaining" class="days-remaining">0</span></span>
+                        </div>
+                        <form id="add-days-form" class="add-days-form">
+                            <div class="form-group add-days-input">
+                                <label for="additional-days"><i class="fas fa-plus-circle"></i> Días adicionales</label>
+                                <input type="number" id="additional-days" min="1" max="30" value="1">
+                            </div>
+                            <button type="submit" class="management-btn btn-warning">
+                                <i class="fas fa-plus"></i> Agregar Días
+                            </button>
+                        </form>
                     </div>
                     
                     <div class="calendar-container">
@@ -1272,6 +1395,17 @@
                 
                 <div class="card payment-history">
                     <h3><i class="fas fa-history"></i> Historial de Pagos - <span id="session-payments-history-label">Mañana</span></h3>
+                    
+                    <div class="date-selector-container">
+                        <span class="date-selector-label">Ver pagos del:</span>
+                        <input type="date" id="payment-history-date" class="date-selector">
+                        <div class="date-navigation">
+                            <button class="date-nav-btn" id="prev-day-btn"><i class="fas fa-chevron-left"></i></button>
+                            <span class="date-display" id="current-date-display">Hoy</span>
+                            <button class="date-nav-btn" id="next-day-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
                     <button class="download-btn" onclick="downloadPaymentHistory()">
                         <i class="fas fa-download"></i> Descargar Historial de Pagos
                     </button>
@@ -1370,6 +1504,9 @@
         // Variable para controlar el reinicio diario
         let lastResetDate = localStorage.getItem('macggym_last_reset_date') || getCurrentDateString();
         
+        // Variable para la fecha seleccionada en el historial de pagos
+        let selectedPaymentHistoryDate = getCurrentDateString();
+        
         // Elementos DOM
         const sessionSelectionScreen = document.getElementById('session-selection-screen');
         const managementScreen = document.getElementById('management-screen');
@@ -1412,6 +1549,19 @@
         const prevMonthBtn = document.getElementById('prev-month');
         const nextMonthBtn = document.getElementById('next-month');
         const attendanceHistory = document.getElementById('attendance-history');
+        
+        // Nuevos elementos para el selector de fecha en historial de pagos
+        const paymentHistoryDateInput = document.getElementById('payment-history-date');
+        const prevDayBtn = document.getElementById('prev-day-btn');
+        const nextDayBtn = document.getElementById('next-day-btn');
+        const currentDateDisplay = document.getElementById('current-date-display');
+        
+        // Nuevos elementos para agregar días adicionales
+        const addDaysSection = document.getElementById('add-days-section');
+        const addDaysForm = document.getElementById('add-days-form');
+        const additionalDaysInput = document.getElementById('additional-days');
+        const daysUsedEl = document.getElementById('days-used');
+        const daysRemainingEl = document.getElementById('days-remaining');
         
         // Variables para el calendario de asistencia
         let currentDate = new Date();
@@ -1458,6 +1608,13 @@
             return result;
         }
         
+        // Función para formatear fecha para mostrar
+        function formatDateForDisplay(dateString) {
+            const date = new Date(dateString + 'T00:00:00');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('es-ES', options);
+        }
+        
         // ========== FUNCIONES CORREGIDAS PARA ACTUALIZACIÓN DIARIA ==========
         
         // Función mejorada para verificar y realizar la actualización diaria
@@ -1467,6 +1624,8 @@
             
             // Si no hay última actualización o es un día diferente, actualizar
             if (!lastUpdate || lastUpdate !== today) {
+                // Limpiar pagos del día anterior (solo en la vista)
+                // Los pagos se mantienen en el almacenamiento para consultas históricas
                 updatePaymentHistoryForNewDay();
                 localStorage.setItem('macggym_last_payment_update', today);
                 console.log('Historial de pagos actualizado para el nuevo día:', today);
@@ -1507,14 +1666,16 @@
         
         // Función mejorada para actualizar el historial de pagos para un nuevo día
         function updatePaymentHistoryForNewDay() {
-            // Aquí puedes implementar cualquier lógica de actualización necesaria
-            // Por ejemplo, podrías archivar pagos antiguos o realizar cálculos diarios
-            
             // Actualizar la visualización del historial de pagos
             updatePaymentsList();
             
             // Actualizar reportes
             updateReports();
+            
+            // Actualizar la fecha seleccionada a hoy
+            selectedPaymentHistoryDate = getCurrentDateString();
+            paymentHistoryDateInput.value = selectedPaymentHistoryDate;
+            updateDateDisplay();
             
             // Mostrar un mensaje indicando que el historial ha sido actualizado
             const now = new Date();
@@ -1525,6 +1686,124 @@
             }
             
             console.log('Historial de pagos actualizado para el nuevo día:', getCurrentDateString());
+        }
+        
+        // ========== FUNCIONES PARA EL SELECTOR DE FECHA ==========
+        
+        // Función para actualizar la visualización de la fecha
+        function updateDateDisplay() {
+            const today = getCurrentDateString();
+            if (selectedPaymentHistoryDate === today) {
+                currentDateDisplay.textContent = 'Hoy';
+            } else {
+                currentDateDisplay.textContent = formatDateForDisplay(selectedPaymentHistoryDate);
+            }
+        }
+        
+        // Función para cambiar la fecha seleccionada
+        function changeSelectedDate(days) {
+            const currentDate = new Date(selectedPaymentHistoryDate + 'T00:00:00');
+            currentDate.setDate(currentDate.getDate() + days);
+            selectedPaymentHistoryDate = formatDateForInput(currentDate);
+            paymentHistoryDateInput.value = selectedPaymentHistoryDate;
+            updateDateDisplay();
+            updatePaymentsList();
+        }
+        
+        // ========== FUNCIONES PARA AGREGAR DÍAS ADICIONALES ==========
+        
+        // Función para actualizar la información de días de un cliente semanal
+        function updateWeeklyClientDaysInfo(clientId) {
+            const client = clients.find(c => c.id === clientId);
+            if (!client || client.membershipType !== 'weekly') return;
+            
+            // Inicializar días usados si no existen
+            if (client.daysUsed === undefined) {
+                client.daysUsed = 0;
+            }
+            
+            // Calcular días restantes
+            const daysRemaining = parseInt(client.daysToPay) - client.daysUsed;
+            
+            // Actualizar la interfaz
+            daysUsedEl.textContent = client.daysUsed;
+            daysRemainingEl.textContent = daysRemaining > 0 ? daysRemaining : 0;
+            
+            // Mostrar/ocultar la sección de agregar días
+            if (client.membershipType === 'weekly') {
+                addDaysSection.style.display = 'block';
+            } else {
+                addDaysSection.style.display = 'none';
+            }
+        }
+        
+        // Función para agregar días adicionales a un cliente semanal
+        function addAdditionalDays(clientId, additionalDays) {
+            const client = clients.find(c => c.id === clientId);
+            if (!client || client.membershipType !== 'weekly') return;
+            
+            // Convertir a número y asegurarse de que sea positivo
+            additionalDays = Math.abs(parseInt(additionalDays));
+            
+            if (isNaN(additionalDays) || additionalDays <= 0) {
+                showAlert('Por favor ingrese un número válido de días', 'error');
+                return;
+            }
+            
+            // Agregar días adicionales
+            client.daysToPay = (parseInt(client.daysToPay) + additionalDays).toString();
+            
+            // Guardar cambios
+            saveToLocalStorage();
+            
+            // Actualizar la interfaz
+            updateWeeklyClientDaysInfo(clientId);
+            updateClientsList();
+            
+            showAlert(`Se agregaron ${additionalDays} días adicionales al cliente`, 'success');
+        }
+        
+        // ========== FUNCIONES PARA FILTRAR CLIENTES EN ASISTENCIA ==========
+        
+        // Función para actualizar el selector de clientes en asistencia (SOLO semanales y mensuales)
+        function updateAttendanceClientSelect() {
+            attendanceClientSelect.innerHTML = '<option value="">Seleccionar cliente</option>';
+            
+            // Filtrar clientes por la sesión actual (SOLO semanales y mensuales)
+            const filteredClients = clients.filter(c => 
+                c.sessionType === currentSession && 
+                (c.membershipType === 'monthly' || c.membershipType === 'weekly')
+            );
+            
+            // Ordenar clientes alfabéticamente
+            filteredClients.sort((a, b) => {
+                const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+                const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+            
+            filteredClients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.id;
+                
+                let extraInfo = '';
+                if (client.membershipType === 'weekly') {
+                    // Inicializar días usados si no existen
+                    if (client.daysUsed === undefined) {
+                        client.daysUsed = 0;
+                    }
+                    const daysRemaining = parseInt(client.daysToPay) - client.daysUsed;
+                    extraInfo = ` (${client.daysToPay} días, ${daysRemaining} restantes)`;
+                } else if (client.membershipType === 'monthly') {
+                    const today = getToday();
+                    const dueDate = new Date(client.dueDate + 'T00:00:00');
+                    const daysLeft = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+                    extraInfo = ` (${daysLeft} días restantes)`;
+                }
+                
+                option.textContent = `${client.firstName} ${client.lastName}${extraInfo}`;
+                attendanceClientSelect.appendChild(option);
+            });
         }
         
         // ========== FIN FUNCIONES CORREGIDAS ==========
@@ -1549,6 +1828,11 @@
             
             // Configurar fecha de pago como la fecha actual
             document.getElementById('payment-date').value = today;
+            
+            // Configurar selector de fecha del historial de pagos
+            paymentHistoryDateInput.value = today;
+            selectedPaymentHistoryDate = today;
+            updateDateDisplay();
             
             // Verificar si es un nuevo día para reiniciar los ingresos
             checkDailyReset();
@@ -1671,11 +1955,44 @@
             attendanceClientSelect.addEventListener('change', function() {
                 selectedClientForAttendance = this.value;
                 if (selectedClientForAttendance) {
+                    // Actualizar información de días para clientes semanales
+                    const client = clients.find(c => c.id === selectedClientForAttendance);
+                    if (client && client.membershipType === 'weekly') {
+                        updateWeeklyClientDaysInfo(selectedClientForAttendance);
+                    } else {
+                        addDaysSection.style.display = 'none';
+                    }
+                    
                     renderCalendar(currentMonth, currentYear);
                     updateAttendanceHistory();
                 } else {
                     calendarBody.innerHTML = '';
                     attendanceHistory.innerHTML = '<h3>Historial de Asistencia</h3>';
+                    addDaysSection.style.display = 'none';
+                }
+            });
+            
+            // Event listeners para el selector de fecha en historial de pagos
+            paymentHistoryDateInput.addEventListener('change', function() {
+                selectedPaymentHistoryDate = this.value;
+                updateDateDisplay();
+                updatePaymentsList();
+            });
+            
+            prevDayBtn.addEventListener('click', function() {
+                changeSelectedDate(-1);
+            });
+            
+            nextDayBtn.addEventListener('click', function() {
+                changeSelectedDate(1);
+            });
+            
+            // Event listener para el formulario de agregar días adicionales
+            addDaysForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (selectedClientForAttendance) {
+                    addAdditionalDays(selectedClientForAttendance, additionalDaysInput.value);
+                    additionalDaysInput.value = '1';
                 }
             });
             
@@ -1837,7 +2154,9 @@
                 dueDate,
                 daysToPay,
                 weeklyStartDate,
-                registrationDate: getCurrentDateString() // Usar función corregida
+                registrationDate: getCurrentDateString(), // Usar función corregida
+                // Inicializar días usados para clientes semanales
+                daysUsed: membershipTypeValue === 'weekly' ? 0 : undefined
             };
             
             clients.push(newClient);
@@ -1924,13 +2243,26 @@
                 // Calcular estado
                 let status = '';
                 let statusClass = '';
+                let extraInfo = '';
                 
                 if (client.membershipType === 'daily') {
                     status = 'Diario';
                     statusClass = 'status-daily';
                 } else if (client.membershipType === 'weekly') {
-                    status = 'Semanal';
-                    statusClass = 'status-weekly';
+                    // Inicializar días usados si no existen
+                    if (client.daysUsed === undefined) {
+                        client.daysUsed = 0;
+                    }
+                    const daysRemaining = parseInt(client.daysToPay) - client.daysUsed;
+                    
+                    if (daysRemaining <= 0) {
+                        status = 'Sin días';
+                        statusClass = 'status-expired';
+                    } else {
+                        status = 'Activo';
+                        statusClass = 'status-weekly';
+                    }
+                    extraInfo = ` (${client.daysToPay} días, ${client.daysUsed} usados)`;
                 } else {
                     const today = getToday();
                     const dueDate = new Date(client.dueDate + 'T00:00:00');
@@ -1951,7 +2283,7 @@
                 } else if (client.membershipType === 'daily') {
                     typeDisplay = 'Diario';
                 } else if (client.membershipType === 'weekly') {
-                    typeDisplay = `Semanal (${client.daysToPay} día(s))`;
+                    typeDisplay = `Semanal${extraInfo}`;
                 }
                 
                 row.innerHTML = `
@@ -1971,11 +2303,14 @@
         function updatePaymentsList() {
             paymentsList.innerHTML = '';
             
-            // Filtrar pagos por la sesión actual
-            const sessionPayments = payments.filter(p => p.sessionType === currentSession);
+            // Filtrar pagos por la sesión actual y la fecha seleccionada
+            const sessionPayments = payments.filter(p => 
+                p.sessionType === currentSession && 
+                p.paymentDate === selectedPaymentHistoryDate
+            );
             
             if (sessionPayments.length === 0) {
-                paymentsList.innerHTML = '<tr><td colspan="4" style="text-align: center;">No hay pagos registrados en esta sesión</td></tr>';
+                paymentsList.innerHTML = '<tr><td colspan="4" style="text-align: center;">No hay pagos registrados para esta fecha</td></tr>';
                 return;
             }
             
@@ -1995,27 +2330,6 @@
                 `;
                 
                 paymentsList.appendChild(row);
-            });
-        }
-        
-        function updateAttendanceClientSelect() {
-            attendanceClientSelect.innerHTML = '<option value="">Seleccionar cliente</option>';
-            
-            // Filtrar clientes por la sesión actual (todos los tipos)
-            const allClients = clients.filter(c => c.sessionType === currentSession);
-            
-            // Ordenar clientes alfabéticamente
-            allClients.sort((a, b) => {
-                const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
-                const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
-                return nameA.localeCompare(nameB);
-            });
-            
-            allClients.forEach(client => {
-                const option = document.createElement('option');
-                option.value = client.id;
-                option.textContent = `${client.firstName} ${client.lastName} (${client.membershipType === 'monthly' ? 'Mensual' : client.membershipType === 'daily' ? 'Diario' : 'Semanal'})`;
-                attendanceClientSelect.appendChild(option);
             });
         }
         
@@ -2264,6 +2578,23 @@
         }
         
         function markAttendance(clientId, date) {
+            const client = clients.find(c => c.id === clientId);
+            if (!client) return;
+            
+            // Verificar si el cliente es semanal y tiene días disponibles
+            if (client.membershipType === 'weekly') {
+                // Inicializar días usados si no existen
+                if (client.daysUsed === undefined) {
+                    client.daysUsed = 0;
+                }
+                
+                // Verificar si tiene días disponibles
+                if (client.daysUsed >= parseInt(client.daysToPay)) {
+                    showAlert('El cliente no tiene días disponibles', 'error');
+                    return;
+                }
+            }
+            
             // Verificar si ya existe una asistencia para esta fecha
             const existingAttendance = attendances.find(a => 
                 a.clientId === clientId && a.date === date
@@ -2274,6 +2605,11 @@
                 attendances = attendances.filter(a => 
                     !(a.clientId === clientId && a.date === date)
                 );
+                
+                // Si es un cliente semanal, restar un día usado
+                if (client.membershipType === 'weekly') {
+                    client.daysUsed = Math.max(0, client.daysUsed - 1);
+                }
             } else {
                 // Si no existe, agregarla
                 attendances.push({
@@ -2282,11 +2618,21 @@
                     date,
                     timestamp: new Date().toISOString()
                 });
+                
+                // Si es un cliente semanal, sumar un día usado
+                if (client.membershipType === 'weekly') {
+                    client.daysUsed += 1;
+                }
             }
             
             saveToLocalStorage();
             renderCalendar(currentMonth, currentYear);
             updateAttendanceHistory();
+            
+            // Actualizar información de días para clientes semanales
+            if (client.membershipType === 'weekly') {
+                updateWeeklyClientDaysInfo(clientId);
+            }
         }
         
         function updateAttendanceHistory() {
@@ -2447,5 +2793,4 @@
         }
     </script>
 </body>
-
 </html>
