@@ -727,9 +727,10 @@
             box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
         }
         
-        /* Estilos para el calendario de asistencia */
+        /* Estilos para el calendario de asistencia - MODIFICADO */
         .calendar-container {
             margin-top: 25px;
+            min-height: 500px;
         }
         
         .calendar-header {
@@ -750,12 +751,21 @@
             font-size: 1.1rem;
         }
         
+        .calendar-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+            max-height: 600px;
+        }
+        
         .calendar {
             width: 100%;
             border-collapse: collapse;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 15px;
             overflow: hidden;
+            min-height: 400px;
         }
         
         .calendar th {
@@ -764,6 +774,7 @@
             padding: 15px;
             text-align: center;
             font-weight: 700;
+            height: 60px;
         }
         
         .calendar td {
@@ -773,6 +784,9 @@
             cursor: pointer;
             position: relative;
             font-weight: 600;
+            height: 60px;
+            vertical-align: top;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .calendar td:hover {
@@ -784,15 +798,23 @@
             font-weight: bold;
         }
         
+        .calendar .day-number {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
         .calendar .attendance-mark {
             position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 10px;
-            height: 10px;
+            bottom: 10px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--success);
             border-radius: 50%;
-            box-shadow: 0 0 5px var(--success);
+            box-shadow: 0 0 8px var(--success);
         }
         
         .attendance-list {
@@ -1057,6 +1079,20 @@
             .add-days-form {
                 flex-direction: column;
             }
+            
+            .calendar td {
+                height: 50px;
+                padding: 10px;
+            }
+            
+            .calendar th {
+                height: 50px;
+                padding: 10px;
+            }
+            
+            .calendar .day-number {
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1076,6 +1112,21 @@
             
             .management-container {
                 padding: 1rem;
+            }
+            
+            .calendar td {
+                height: 40px;
+                padding: 5px;
+            }
+            
+            .calendar th {
+                height: 40px;
+                padding: 5px;
+                font-size: 0.8rem;
+            }
+            
+            .calendar .day-number {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -1286,22 +1337,24 @@
                             <button class="calendar-nav" id="next-month"><i class="fas fa-chevron-right"></i></button>
                         </div>
                         
-                        <table class="calendar" id="attendance-calendar">
-                            <thead>
-                                <tr>
-                                    <th>Dom</th>
-                                    <th>Lun</th>
-                                    <th>Mar</th>
-                                    <th>Mié</th>
-                                    <th>Jue</th>
-                                    <th>Vie</th>
-                                    <th>Sáb</th>
-                                </tr>
-                            </thead>
-                            <tbody id="calendar-body">
-                                <!-- El calendario se generará dinámicamente -->
-                            </tbody>
-                        </table>
+                        <div class="calendar-wrapper">
+                            <table class="calendar" id="attendance-calendar">
+                                <thead>
+                                    <tr>
+                                        <th>Dom</th>
+                                        <th>Lun</th>
+                                        <th>Mar</th>
+                                        <th>Mié</th>
+                                        <th>Jue</th>
+                                        <th>Vie</th>
+                                        <th>Sáb</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calendar-body">
+                                    <!-- El calendario se generará dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     
                     <div class="attendance-list" id="attendance-history">
@@ -2594,8 +2647,8 @@
                         // Celdas vacías después del último día del mes
                         cell.textContent = '';
                     } else {
-                        // Días del mes
-                        cell.textContent = date;
+                        // Días del mes - usar un span para el número del día
+                        cell.innerHTML = `<span class="day-number">${date}</span>`;
                         
                         // Marcar el día actual
                         const today = new Date();
