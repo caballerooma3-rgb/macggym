@@ -37,7 +37,7 @@
         
         body {
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('yeababy.png') no-repeat center center fixed;
             background-size: cover;
             color: var(--light);
@@ -46,332 +46,257 @@
             min-height: 100vh;
         }
         
-        /* PANTALLA DE SELECCIÓN DE SESIÓN */
-        #session-selection-screen {
+        /* PANTALLA SIMPLIFICADA DE INICIO */
+        #welcome-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
             min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 900px;
-            width: 100%;
-            background: rgba(30, 30, 30, 0.4);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 2rem;
+            padding: 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
         
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+        .welcome-container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(231, 76, 60, 0.3);
+            padding: 50px 40px;
+            animation: fadeIn 1s ease;
         }
         
         .logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            gap: 20px;
+            margin-bottom: 25px;
         }
         
         .logo-icon {
-            font-size: 3rem;
-            color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 4rem;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.7);
+            animation: pulse 2s infinite;
         }
         
         .logo h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 3.2rem;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 10px;
-            position: relative;
-            z-index: 1;
+            font-size: 1.3rem;
+            margin: 25px 0 40px;
+            color: var(--light);
             font-style: italic;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--primary);
         }
         
-        .session-selection {
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        
-        .session-card {
-            background: linear-gradient(145deg, rgba(44, 44, 44, 0.4), rgba(37, 37, 37, 0.4));
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s ease;
+        .main-btn {
+            padding: 25px 50px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.8rem;
+            font-weight: 900;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             position: relative;
             overflow: hidden;
+            margin: 40px 0;
+            border: 3px solid rgba(255, 255, 255, 0.2);
         }
         
-        .session-card::before {
-            content: "";
+        .main-btn:before {
+            content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
         }
         
-        .session-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        .main-btn:hover:before {
+            left: 100%;
         }
         
-        .session-card.morning:hover {
-            border-color: var(--morning);
+        .main-btn:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5);
+            filter: brightness(1.2);
+            letter-spacing: 4px;
         }
         
-        .session-card.afternoon:hover {
-            border-color: var(--afternoon);
+        .main-btn:active {
+            transform: translateY(-3px) scale(1.01);
         }
         
-        .session-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+        .main-btn i {
+            margin-right: 20px;
+            font-size: 2.2rem;
+            vertical-align: middle;
         }
         
-        .session-morning .session-icon {
-            background: linear-gradient(135deg, var(--morning), var(--morning-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .session-afternoon .session-icon {
-            background: linear-gradient(135deg, var(--afternoon), var(--afternoon-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .session-card h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
             color: var(--light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            font-weight: 300;
+        }
+        
+        .session-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .session-time {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            padding: 12px;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            display: inline-block;
-            width: 100%;
-        }
-        
-        .session-morning .session-time {
-            background: rgba(52, 152, 219, 0.2);
-            color: var(--morning);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-        }
-        
-        .session-afternoon .session-time {
-            background: rgba(231, 76, 60, 0.2);
-            color: var(--afternoon);
-            border: 1px solid rgba(231, 76, 60, 0.3);
-        }
-        
-        .session-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-        
-        .session-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
-        }
-        
-        .session-features li:last-child {
-            border-bottom: none;
-        }
-        
-        .session-features li i {
-            margin-right: 10px;
-            width: 20px;
+            gap: 12px;
             font-size: 1.1rem;
+            font-weight: 600;
         }
         
-        .session-morning .session-features li i {
-            color: var(--morning);
-        }
-        
-        .session-afternoon .session-features li i {
-            color: var(--afternoon);
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        .session-time i {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
         }
         
-        .btn-morning {
-            background: linear-gradient(135deg, var(--morning), var(--morning-dark));
-            color: white;
+        .session-time.morning i {
+            color: var(--morning);
+            background: rgba(52, 152, 219, 0.2);
         }
         
-        .btn-afternoon {
-            background: linear-gradient(135deg, var(--afternoon), var(--afternoon-dark));
-            color: white;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            filter: brightness(1.1);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            color: var(--light);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .session-time.afternoon i {
+            color: var(--afternoon);
+            background: rgba(231, 76, 60, 0.2);
         }
         
         /* PANTALLA DE GESTIÓN */
         #management-screen {
             display: none;
             min-height: 100vh;
+            width: 100%;
         }
         
         /* NUEVO HEADER SIMPLIFICADO */
         .management-header {
-            background: rgba(30, 30, 30, 0.9);
-            padding: 10px 15px;
+            background: rgba(30, 30, 30, 0.95);
+            padding: 15px 20px;
             position: none;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(231, 76, 60, 0.3);
         }
         
         .header-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 15px;
         }
         
         .management-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         
         .management-logo-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary);
         }
         
         .management-logo h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
         
         /* BOTONES DE CAMBIO DE SESIÓN SIMPLIFICADOS */
         .session-switcher {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             align-items: center;
         }
         
         .session-switch-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 15px;
+            gap: 10px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 10px;
-            font-weight: 600;
+            border-radius: 15px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            min-width: 140px;
             justify-content: center;
             border: 2px solid transparent;
         }
         
         .session-switch-btn i {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
         
         .session-switch-btn span {
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1.2;
+            line-height: 1.3;
         }
         
         .session-switch-btn small {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             opacity: 0.9;
             font-weight: 500;
         }
@@ -387,15 +312,15 @@
         }
         
         .session-switch-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
-            filter: brightness(1.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            filter: brightness(1.15);
         }
         
         .session-switch-btn.active {
             border-color: white;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 0 3px 8px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3), 0 5px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
         }
         
         .session-switch-btn.inactive {
@@ -406,34 +331,34 @@
         .management-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 2rem;
         }
         
         .tabs {
             display: flex;
-            background-color: rgba(30, 30, 30, 0.6);
-            border-radius: 15px 15px 0 0;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 20px 20px 0 0;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             margin-bottom: 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
         }
         
         .tab {
-            padding: 15px 20px;
+            padding: 18px 25px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--light);
             position: relative;
             overflow: hidden;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
         }
         
         .tab:last-child {
@@ -446,23 +371,23 @@
         }
         
         .tab:not(.active):hover {
-            background-color: rgba(231, 76, 60, 0.2);
+            background-color: rgba(231, 76, 60, 0.3);
         }
         
         .tab i {
-            margin-right: 5px;
-            font-size: 1rem;
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
         
         .tab-content {
             display: none;
-            background-color: rgba(30, 30, 30, 0.4);
-            padding: 1.5rem;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(30, 30, 30, 0.6);
+            padding: 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-top: none;
             color: var(--light);
         }
@@ -473,49 +398,49 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 1rem;
             color: var(--light);
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
         }
         
         input, select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 15px 20px;
             border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             color: var(--light);
         }
         
         input:focus, select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
-            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.3);
+            background: rgba(0, 0, 0, 0.6);
         }
         
         .management-btn {
-            padding: 14px 20px;
+            padding: 18px 25px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 800;
             transition: all 0.3s ease;
             width: 100%;
-            margin-top: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
         
         .btn-primary {
@@ -524,9 +449,9 @@
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            filter: brightness(1.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.15);
         }
         
         .btn-success {
@@ -535,50 +460,50 @@
         }
         
         .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            filter: brightness(1.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.15);
         }
         
         .btn-warning {
             background: linear-gradient(135deg, var(--warning), var(--warning-dark));
             color: white;
-            padding: 10px 15px;
-            font-size: 0.8rem;
+            padding: 12px 18px;
+            font-size: 0.9rem;
             width: auto;
         }
         
         .btn-warning:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
         }
         
         .btn-danger {
             background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
             color: white;
-            padding: 10px 15px;
-            font-size: 0.8rem;
+            padding: 12px 18px;
+            font-size: 0.9rem;
             width: auto;
         }
         
         .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
         }
         
         .client-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
         }
         
         .client-table th, .client-table td {
-            padding: 12px 10px;
+            padding: 15px 12px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -586,14 +511,14 @@
         .client-table th {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             position: sticky;
             top: 0;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
         
         .client-table tr:hover {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.08);
         }
         
         .client-table tr:last-child td {
@@ -601,52 +526,52 @@
         }
         
         .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
             display: inline-block;
         }
         
         .status-active {
-            background-color: rgba(46, 204, 113, 0.2);
+            background-color: rgba(46, 204, 113, 0.3);
             color: #2ecc71;
-            border: 1px solid rgba(46, 204, 113, 0.3);
+            border: 2px solid rgba(46, 204, 113, 0.4);
         }
         
         .status-expired {
-            background-color: rgba(231, 76, 60, 0.2);
+            background-color: rgba(231, 76, 60, 0.3);
             color: #e74c3c;
-            border: 1px solid rgba(231, 76, 60, 0.3);
+            border: 2px solid rgba(231, 76, 60, 0.4);
         }
         
         .status-daily {
-            background-color: rgba(243, 156, 18, 0.2);
+            background-color: rgba(243, 156, 18, 0.3);
             color: #f39c12;
-            border: 1px solid rgba(243, 156, 18, 0.3);
+            border: 2px solid rgba(243, 156, 18, 0.4);
         }
         
         .status-weekly {
-            background-color: rgba(155, 89, 182, 0.2);
+            background-color: rgba(155, 89, 182, 0.3);
             color: #9b59b6;
-            border: 1px solid rgba(155, 89, 182, 0.3);
+            border: 2px solid rgba(155, 89, 182, 0.4);
         }
         
         .summary-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin-bottom: 25px;
         }
         
         .summary-card {
-            background: linear-gradient(145deg, rgba(44, 44, 44, 0.6), rgba(37, 37, 37, 0.6));
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, rgba(44, 44, 44, 0.8), rgba(37, 37, 37, 0.6));
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -657,26 +582,26 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 5px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .summary-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
         
         .summary-card h3 {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: var(--light);
-            font-size: 0.9rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1.5px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
         }
         
         .summary-card .value {
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 2.2rem;
+            font-weight: 900;
             color: var(--primary);
         }
         
@@ -697,22 +622,22 @@
         }
         
         .alert {
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-left: 4px solid transparent;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid transparent;
         }
         
         .alert-success {
-            background-color: rgba(46, 204, 113, 0.2);
+            background-color: rgba(46, 204, 113, 0.3);
             color: #2ecc71;
             border-left-color: var(--success);
         }
         
         .alert-error {
-            background-color: rgba(231, 76, 60, 0.2);
+            background-color: rgba(231, 76, 60, 0.3);
             color: #e74c3c;
             border-left-color: var(--secondary);
         }
@@ -722,12 +647,12 @@
         }
         
         .payment-history {
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .actions {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
         
         .actions button {
@@ -736,22 +661,22 @@
         
         .last-update {
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #aaa;
-            margin-top: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
         
         .card {
-            background: linear-gradient(145deg, rgba(44, 44, 44, 0.6), rgba(37, 37, 37, 0.4));
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(145deg, rgba(44, 44, 44, 0.8), rgba(37, 37, 37, 0.5));
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -762,121 +687,129 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 5px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .card h2 {
             color: var(--primary);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+            font-size: 1.5rem;
         }
         
         .floating-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            font-size: 1.8rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             border: none;
         }
         
         .floating-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
         }
         
         /* Estilos para el calendario de asistencia */
         .calendar-container {
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .calendar-nav {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1.1rem;
         }
         
         .calendar {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
             overflow: hidden;
         }
         
         .calendar th {
             background: var(--primary);
             color: white;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
+            font-weight: 700;
         }
         
         .calendar td {
-            padding: 10px;
+            padding: 15px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             position: relative;
+            font-weight: 600;
         }
         
         .calendar td:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .calendar .today {
-            background: rgba(231, 76, 60, 0.3);
+            background: rgba(231, 76, 60, 0.4);
             font-weight: bold;
         }
         
         .calendar .attendance-mark {
             position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 8px;
-            height: 8px;
+            bottom: 5px;
+            right: 5px;
+            width: 10px;
+            height: 10px;
             background: var(--success);
             border-radius: 50%;
+            box-shadow: 0 0 5px var(--success);
         }
         
         .attendance-list {
-            max-height: 300px;
+            max-height: 350px;
             overflow-y: auto;
-            margin-top: 15px;
+            margin-top: 20px;
         }
         
         .attendance-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
         
         .attendance-item:last-child {
@@ -884,29 +817,29 @@
         }
         
         .attendance-date {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #aaa;
         }
         
         /* Estilos para método de pago */
         .payment-method-badge {
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
             display: inline-block;
         }
         
         .method-cash {
-            background-color: rgba(46, 204, 113, 0.2);
+            background-color: rgba(46, 204, 113, 0.3);
             color: #2ecc71;
-            border: 1px solid rgba(46, 204, 113, 0.3);
+            border: 2px solid rgba(46, 204, 113, 0.4);
         }
         
         .method-bank {
-            background-color: rgba(52, 152, 219, 0.2);
+            background-color: rgba(52, 152, 219, 0.3);
             color: #3498db;
-            border: 1px solid rgba(52, 152, 219, 0.3);
+            border: 2px solid rgba(52, 152, 219, 0.4);
         }
         
         /* Estilos para búsqueda de clientes en pagos */
@@ -919,18 +852,18 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.9);
-            border-radius: 0 0 8px 8px;
-            max-height: 150px;
+            background: rgba(0, 0, 0, 0.95);
+            border-radius: 0 0 12px 12px;
+            max-height: 200px;
             overflow-y: auto;
             z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             display: none;
         }
         
         .client-suggestion {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
         }
         
@@ -939,63 +872,63 @@
         }
         
         .client-suggestion:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         /* Estilos para botón de descarga */
         .download-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: white;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            margin-top: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            gap: 8px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
         
         /* Selector de fecha para historial de pagos */
         .date-selector-container {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .date-selector-label {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--light);
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
         }
         
         .date-selector {
-            padding: 8px 12px;
+            padding: 10px 15px;
             border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.4);
             color: var(--light);
         }
         
         .date-navigation {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
         
         .date-nav-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s;
@@ -1003,29 +936,29 @@
         
         .date-nav-btn:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         
         .date-display {
-            font-weight: 600;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
         
         /* Estilos para agregar días adicionales a clientes semanales */
         .add-days-container {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
         
         .add-days-form {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             align-items: flex-end;
         }
         
@@ -1036,49 +969,60 @@
         .days-info {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
-            font-size: 0.9rem;
+            margin-top: 15px;
+            font-size: 1rem;
         }
         
         .days-remaining {
             color: var(--success);
             font-weight: bold;
+            font-size: 1.1rem;
         }
         
         .days-used {
             color: var(--warning);
             font-weight: bold;
+            font-size: 1.1rem;
         }
         
         /* Animaciones suaves */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         .pulse {
             animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-        }
-        
         /* Responsive */
         @media (max-width: 768px) {
-            .session-selection {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .welcome-container {
+                padding: 30px 20px;
             }
             
             .logo h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
-            .session-card {
-                padding: 1.5rem;
+            .logo-icon {
+                font-size: 3rem;
+            }
+            
+            .main-btn {
+                font-size: 1.3rem;
+                padding: 20px 30px;
+            }
+            
+            .session-info {
+                flex-direction: column;
+                align-items: center;
             }
             
             .summary-cards {
@@ -1101,8 +1045,8 @@
             }
             
             .session-switch-btn {
-                min-width: 110px;
-                padding: 8px 12px;
+                min-width: 130px;
+                padding: 10px 15px;
             }
             
             .date-selector-container {
@@ -1114,65 +1058,55 @@
                 flex-direction: column;
             }
         }
+        
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-btn {
+                font-size: 1.1rem;
+                padding: 18px 25px;
+            }
+            
+            .management-container {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- PANTALLA DE SELECCIÓN DE SESIÓN -->
-    <div id="session-selection-screen">
-        <div class="container">
-            <header>
-                <div class="logo">
-                    <div class="logo-icon"><i class="fas fa-dumbbell"></i></div>
-                    <h1>MACGGYM</h1>
-                </div>
-                <p class="subtitle">Yeah buddy! Lightweight baby! - Selecciona tu sesión</p>
-            </header>
+    <!-- PANTALLA SIMPLIFICADA DE INICIO -->
+    <div id="welcome-screen">
+        <div class="welcome-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-dumbbell"></i></div>
+                <h1>MACGGYM</h1>
+            </div>
             
-            <div class="session-selection">
-                <div class="session-card session-morning">
-                    <div class="session-icon">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <h2>Sesión Mañana</h2>
-                    <div class="session-time">
-                        <i class="fas fa-clock"></i> 5:00 AM - 10:00 AM
-                    </div>
-                    <ul class="session-features">
-                        <li><i class="fas fa-check"></i> Entrenamiento energizante</li>
-                        <li><i class="fas fa-check"></i> Ambiente fresco y tranquilo</li>
-                        <li><i class="fas fa-check"></i> Ideal para empezar el día</li>
-                        <li><i class="fas fa-check"></i> Menos concurrido</li>
-                    </ul>
-                    <button class="btn btn-morning" onclick="openSession('morning')">
-                        <i class="fas fa-door-open"></i> Entrar a Sesión Mañana
-                    </button>
+            <p class="subtitle">Te destruiré como no tienes idea, pero si soportas te subiré a la cima como no te imaginas</p>
+            
+            <button class="main-btn" onclick="openManagement()">
+                <i class="fas fa-dumbbell"></i> Yeah buddy! Lightweight
+            </button>
+            
+            <div class="session-info">
+                <div class="session-time morning">
+                    <i class="fas fa-sun"></i>
+                    <span>Mañana: 5:00 AM - 10:00 AM</span>
                 </div>
-                
-                <div class="session-card session-afternoon">
-                    <div class="session-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <h2>Sesión Tarde</h2>
-                    <div class="session-time">
-                        <i class="fas fa-clock"></i> 4:00 PM - 9:30 PM
-                    </div>
-                    <ul class="session-features">
-                        <li><i class="fas fa-check"></i> Entrenamiento intenso</li>
-                        <li><i class="fas fa-check"></i> Ambiente social y motivador</li>
-                        <li><i class="fas fa-check"></i> Perfecto después del trabajo</li>
-                        <li><i class="fas fa-check"></i> Mayor disponibilidad de entrenadores</li>
-                    </ul>
-                    <button class="btn btn-afternoon" onclick="openSession('afternoon')">
-                        <i class="fas fa-door-open"></i> Entrar a Sesión Tarde
-                    </button>
+                <div class="session-time afternoon">
+                    <i class="fas fa-moon"></i>
+                    <span>Tarde: 4:00 PM - 9:30 PM</span>
                 </div>
             </div>
             
-            <footer>
-                <p>Te destruiré como no tienes idea, pero si soportas te subiré a la cima como no te imaginas"
-
-- La disciplina -</p>
-            </footer>
+            <p class="quote">"La disciplina vence al talento cuando el talento no se disciplina"</p>
         </div>
     </div>
 
@@ -1192,7 +1126,7 @@
                     </button>
                     <button class="session-switch-btn btn-afternoon-simple" data-session="afternoon">
                         <i class="fas fa-moon"></i>
-                        <span>Tarde<small>4-9:30 PM</small></span>
+                        <span>Tarde<small>4-9 PM</small></span>
                     </button>
                 </div>
             </div>
@@ -1279,7 +1213,7 @@
                         <!-- SESIÓN ACTUAL MOVIDA AQUÍ -->
                         <div class="form-group">
                             <label><i class="fas fa-clock"></i> Sesión Actual</label>
-                            <div id="current-session-display" class="session-time" style="text-align: center; padding: 10px;">
+                            <div id="current-session-display" class="session-time" style="text-align: center; padding: 15px; border-radius: 12px; background: rgba(52, 152, 219, 0.2); border: 2px solid rgba(52, 152, 219, 0.3);">
                                 <i class="fas fa-sun"></i> Sesión Mañana (5:00 AM - 10:00 AM)
                             </div>
                         </div>
@@ -1502,7 +1436,6 @@
         <div class="floating-btn" id="quick-register-btn">
             <i class="fas fa-plus"></i>
         </div>
-        <!-- SE ELIMINÓ EL ELEMENTO DE MOTIVACIÓN AQUÍ -->
     </div>
 
     <script>
@@ -1522,7 +1455,7 @@
         let selectedPaymentHistoryDate = getCurrentDateString();
         
         // Elementos DOM
-        const sessionSelectionScreen = document.getElementById('session-selection-screen');
+        const welcomeScreen = document.getElementById('welcome-screen');
         const managementScreen = document.getElementById('management-screen');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -1880,15 +1813,46 @@
             });
         }
         
-        // ========== FIN FUNCIONES CORREGIDAS ==========
+        // ========== FUNCIONES SIMPLIFICADAS PARA LA PANTALLA DE INICIO ==========
         
-        // Inicialización
+        // Función para abrir la pantalla de gestión
+        function openManagement() {
+            welcomeScreen.style.display = 'none';
+            managementScreen.style.display = 'block';
+            
+            // Inicializar la sesión con la mañana por defecto
+            currentSession = 'morning';
+            localStorage.setItem('macggym_selected_session', 'morning');
+            
+            // Inicializar la interfaz
+            updateSessionButtons();
+            updateSessionDisplay();
+            updateClientsList();
+            updatePaymentsList();
+            updateAttendanceClientSelect();
+            updateReports();
+            updateLastUpdateTime();
+        }
+        
+        // ========== INICIALIZACIÓN ==========
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar si ya hay una sesión seleccionada
+            // Si ya hay una sesión guardada, ir directamente a la gestión
             const savedSession = localStorage.getItem('macggym_selected_session');
             if (savedSession) {
-                // Si hay una sesión guardada, mostrar directamente la pantalla de gestión
-                openSession(savedSession);
+                // Iniciar directamente con la sesión guardada
+                welcomeScreen.style.display = 'none';
+                managementScreen.style.display = 'block';
+                
+                currentSession = savedSession;
+                
+                // Inicializar la interfaz
+                updateSessionButtons();
+                updateSessionDisplay();
+                updateClientsList();
+                updatePaymentsList();
+                updateAttendanceClientSelect();
+                updateReports();
+                updateLastUpdateTime();
             }
             
             // Configurar fecha actual como predeterminada usando nuestra función corregida
@@ -2103,6 +2067,8 @@
             initializePaymentHistoryUpdate();
         });
         
+        // ========== FUNCIONES AUXILIARES ==========
+        
         // Función para formatear números con separadores de miles
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -2130,26 +2096,7 @@
             return parseInt(value.replace(/\./g, ''));
         }
         
-        // Abrir sesión seleccionada
-        function openSession(session) {
-            currentSession = session;
-            localStorage.setItem('macggym_selected_session', session);
-            
-            // Ocultar pantalla de selección y mostrar pantalla de gestión
-            sessionSelectionScreen.style.display = 'none';
-            managementScreen.style.display = 'block';
-            
-            // Actualizar la visualización de la sesión
-            updateSessionButtons();
-            updateSessionDisplay();
-            
-            // Inicializar datos
-            updateClientsList();
-            updatePaymentsList();
-            updateAttendanceClientSelect();
-            updateReports();
-            updateLastUpdateTime();
-        }
+        // ========== FUNCIONES DE NAVEGACIÓN POR PESTAÑAS ==========
         
         // Navegación por pestañas
         tabs.forEach(tab => {
@@ -2175,6 +2122,8 @@
             });
         });
         
+        // ========== FUNCIONES DE ACTUALIZACIÓN DE INTERFAZ ==========
+        
         // Actualizar la visualización de la sesión
         function updateSessionDisplay() {
             const sessionName = currentSession === 'morning' ? 'Mañana' : 'Tarde';
@@ -2184,7 +2133,15 @@
             // Actualizar formulario de registro
             const currentSessionDisplay = document.getElementById('current-session-display');
             currentSessionDisplay.innerHTML = `<i class="fas ${sessionIcon}"></i> Sesión ${sessionName} (${sessionTime})`;
-            currentSessionDisplay.className = `session-time ${currentSession === 'morning' ? 'session-morning' : 'session-afternoon'}`;
+            
+            // Aplicar estilo según la sesión
+            if (currentSession === 'morning') {
+                currentSessionDisplay.style.background = 'rgba(52, 152, 219, 0.2)';
+                currentSessionDisplay.style.border = '2px solid rgba(52, 152, 219, 0.3)';
+            } else {
+                currentSessionDisplay.style.background = 'rgba(231, 76, 60, 0.2)';
+                currentSessionDisplay.style.border = '2px solid rgba(231, 76, 60, 0.3)';
+            }
             
             // Actualizar labels en las pestañas
             sessionClientsLabel.textContent = sessionName;
@@ -2194,6 +2151,8 @@
             sessionReportsLabel.textContent = sessionName;
             sessionExpiringLabel.textContent = sessionName;
         }
+        
+        // ========== FUNCIONES DE GESTIÓN DE DATOS ==========
         
         // Registrar nuevo cliente con validación de duplicados
         clientForm.addEventListener('submit', function(e) {
@@ -2318,12 +2277,12 @@
             
             // Restablecer valores predeterminados
             document.getElementById('payment-date').value = getCurrentDateString();
-            document.getElementById('payment-method').value = 'cash'; // ESTA LÍNEA ES NUEVA
+            document.getElementById('payment-method').value = 'cash';
             paymentClientSearch.value = '';
             paymentClient.value = '';
         });
         
-        // Funciones auxiliares
+        // Funciones auxiliares para actualizar listas
         function updateClientsList() {
             const searchTerm = searchClientInput.value.toLowerCase();
             // Filtrar clientes por la sesión actual
@@ -2591,7 +2550,8 @@
             localStorage.setItem('macggym_attendances', JSON.stringify(attendances));
         }
         
-        // Funciones para el calendario de asistencia
+        // ========== FUNCIONES PARA EL CALENDARIO DE ASISTENCIA ==========
+        
         function initAttendanceCalendar() {
             renderCalendar(currentMonth, currentYear);
         }
@@ -2618,7 +2578,6 @@
             const startingDay = firstDay.getDay();
             
             let date = 1;
-            let calendarHTML = '';
             
             // Crear filas para el calendario
             for (let i = 0; i < 6; i++) {
