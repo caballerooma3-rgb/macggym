@@ -296,23 +296,23 @@
             min-height: 100vh;
         }
         
+        /* NUEVO HEADER SIMPLIFICADO */
         .management-header {
-            background: rgba(30, 30, 30, 0.7);
-            color: var(--primary);
-            padding: 1rem;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 10px 15px;
             position: none;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .header-top {
-            display: flex;            
+            display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            gap: 10px;
         }
         
         .management-logo {
@@ -322,12 +322,12 @@
         }
         
         .management-logo-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary);
         }
         
         .management-logo h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
@@ -336,51 +336,71 @@
             letter-spacing: 1px;
         }
         
-        .session-info {
+        /* BOTONES DE CAMBIO DE SESIÓN SIMPLIFICADOS */
+        .session-switcher {
             display: flex;
-            align-items: center;
             gap: 10px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
         }
         
-        .session-morning-info {
+        .session-switch-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            min-width: 120px;
+            justify-content: center;
+            border: 2px solid transparent;
+        }
+        
+        .session-switch-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .session-switch-btn span {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+        
+        .session-switch-btn small {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .btn-morning-simple {
             background: linear-gradient(135deg, var(--morning), var(--morning-dark));
             color: white;
         }
         
-        .session-afternoon-info {
+        .btn-afternoon-simple {
             background: linear-gradient(135deg, var(--afternoon), var(--afternoon-dark));
             color: white;
         }
         
-        .change-session {
-            margin-top: 10px;
-            text-align: center;
-        }
-        
-        .change-session-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .change-session-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .session-switch-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
+        }
+        
+        .session-switch-btn.active {
+            border-color: white;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 0 3px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .session-switch-btn.inactive {
+            opacity: 0.7;
+            filter: grayscale(0.3);
         }
         
         .management-container {
@@ -943,20 +963,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
         
-        /* Efectos deportivos adicionales */
-        .workout-motivation {       
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            border-left: 4px solid var(--primary);
-            max-width: 250px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);            
-        }
-        
         /* Selector de fecha para historial de pagos */
         .date-selector-container {
             display: flex;
@@ -1086,7 +1092,17 @@
             
             .header-top {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
+            }
+            
+            .session-switcher {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .session-switch-btn {
+                min-width: 110px;
+                padding: 8px 12px;
             }
             
             .date-selector-container {
@@ -1162,21 +1178,23 @@
 
     <!-- PANTALLA DE GESTIÓN -->
     <div id="management-screen">
+        <!-- NUEVO HEADER SIMPLIFICADO -->
         <div class="management-header">
             <div class="header-top">
                 <div class="management-logo">
                     <div class="management-logo-icon"><i class="fas fa-dumbbell"></i></div>
-                   <h1>MACGGYM</h1>
+                    <h1>MACGGYM</h1>
                 </div>
-                <div id="session-display" class="session-info session-morning-info">
-                    <i class="fas fa-sun"></i>
-                    <span>Sesión Mañana: 5:00 AM - 10:00 AM</span>
+                <div class="session-switcher">
+                    <button class="session-switch-btn btn-morning-simple active" data-session="morning">
+                        <i class="fas fa-sun"></i>
+                        <span>Mañana<small>5-10 AM</small></span>
+                    </button>
+                    <button class="session-switch-btn btn-afternoon-simple" data-session="afternoon">
+                        <i class="fas fa-moon"></i>
+                        <span>Tarde<small>4-9:30 PM</small></span>
+                    </button>
                 </div>
-            </div>
-            <div class="change-session">
-                <button class="change-session-btn" onclick="changeSession()">
-                    <i class="fas fa-exchange-alt"></i> Cambiar de Sesión
-                </button>
             </div>
         </div>
         
@@ -1213,13 +1231,6 @@
                         </div>
                         
                         <div class="form-group">
-                            <label><i class="fas fa-clock"></i> Sesión Actual</label>
-                            <div id="current-session-display" class="session-info session-morning-info" style="justify-content: center;">
-                                <i class="fas fa-sun"></i> Mañana (5:00 AM - 10:00 AM)
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="membershipType"><i class="fas fa-calendar-alt"></i> Tipo de Suscripción</label>
                             <select id="membershipType" required>
                                 <option value="">Seleccionar</option>
@@ -1247,21 +1258,30 @@
                                 <option value="5">5 días</option>
                                 <option value="6">6 días</option>
                                 <option value="7">7 días</option>
-<option value=" 8">8 días</option> 
-<option value=" 9">9 días</option> 
-<option value=" 10">10 días</option> 
-<option value=" 11">11 días</option> 
-<option value="12">12 días</option> <option value=" 15">15 días</option> 
-<option value=" 20">20 días</option>
-<option value=" 21">21 días</option> 
-<option value=" 22">22 días</option>
-<option value=" 23">23 días</option>
-<option value=" 24">24 días</option>
-<option value=" 30">30 días</option>
+                                <option value="8">8 días</option>
+                                <option value="9">9 días</option>
+                                <option value="10">10 días</option>
+                                <option value="11">11 días</option>
+                                <option value="12">12 días</option>
+                                <option value="15">15 días</option>
+                                <option value="20">20 días</option>
+                                <option value="21">21 días</option>
+                                <option value="22">22 días</option>
+                                <option value="23">23 días</option>
+                                <option value="24">24 días</option>
+                                <option value="30">30 días</option>
                             </select>
                             
                             <label for="weekly-start-date"><i class="fas fa-calendar-plus"></i> Fecha de Inicio</label>
                             <input type="date" id="weekly-start-date">
+                        </div>
+                        
+                        <!-- SESIÓN ACTUAL MOVIDA AQUÍ -->
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Sesión Actual</label>
+                            <div id="current-session-display" class="session-time" style="text-align: center; padding: 10px;">
+                                <i class="fas fa-sun"></i> Sesión Mañana (5:00 AM - 10:00 AM)
+                            </div>
                         </div>
                         
                         <button type="submit" class="management-btn btn-primary">
@@ -1406,9 +1426,6 @@
                         </div>
                     </div>
                     
-                    <button class="download-btn" onclick="downloadPaymentHistory()">
-                        <i class="fas fa-download"></i> Descargar Historial de Pagos
-                    </button>
                     <div class="last-update" id="payment-update-time">
                         <i class="fas fa-sync-alt"></i> Historial actualizado diariamente a las 00:00
                     </div>
@@ -1485,10 +1502,7 @@
         <div class="floating-btn" id="quick-register-btn">
             <i class="fas fa-plus"></i>
         </div>
-        
-        <div class="workout-motivation">
-            <i class="fas fa-fire"></i> <strong>No pain, no gain!</strong> ¡Sigue entrenando!
-        </div>
+        <!-- SE ELIMINÓ EL ELEMENTO DE MOTIVACIÓN AQUÍ -->
     </div>
 
     <script>
@@ -1534,8 +1548,6 @@
         const formAlert = document.getElementById('form-alert');
         const updateTimeEl = document.getElementById('update-time');
         const paymentUpdateTimeEl = document.getElementById('payment-update-time');
-        const sessionDisplay = document.getElementById('session-display');
-        const currentSessionDisplay = document.getElementById('current-session-display');
         const sessionClientsLabel = document.getElementById('session-clients-label');
         const sessionPaymentsLabel = document.getElementById('session-payments-label');
         const sessionAttendanceLabel = document.getElementById('session-attendance-label');
@@ -1568,6 +1580,9 @@
         let currentMonth = currentDate.getMonth();
         let currentYear = currentDate.getFullYear();
         let selectedClientForAttendance = null;
+        
+        // Elementos para los botones de cambio de sesión
+        const sessionSwitchBtns = document.querySelectorAll('.session-switch-btn');
         
         // ========== FUNCIONES CORREGIDAS PARA FECHAS ==========
         
@@ -1806,6 +1821,65 @@
             });
         }
         
+        // ========== FUNCIÓN MEJORADA PARA REINICIO DIARIO ==========
+        
+        // Función mejorada para reinicio diario
+        function checkDailyReset() {
+            const today = getCurrentDateString();
+            const lastReset = localStorage.getItem('macggym_last_reset_date');
+            
+            if (lastReset !== today) {
+                // Reiniciar contadores del día
+                console.log('Reiniciando datos del día:', today);
+                
+                // Actualizar fecha de último reinicio
+                localStorage.setItem('macggym_last_reset_date', today);
+                
+                // Notificar al usuario
+                if (todayIncomeEl) {
+                    todayIncomeEl.textContent = '$0';
+                }
+            }
+        }
+        
+        // ========== FUNCIONES PARA CAMBIAR SESIÓN SIMPLIFICADO ==========
+        
+        // Función para cambiar de sesión con los botones simplificados
+        function switchSession(session) {
+            if (session === currentSession) return;
+            
+            currentSession = session;
+            localStorage.setItem('macggym_selected_session', session);
+            
+            // Actualizar la visualización de los botones
+            updateSessionButtons();
+            
+            // Actualizar toda la interfaz para la nueva sesión
+            updateSessionDisplay();
+            updateClientsList();
+            updatePaymentsList();
+            updateAttendanceClientSelect();
+            updateReports();
+            
+            // Mostrar confirmación
+            const sessionName = session === 'morning' ? 'Mañana' : 'Tarde';
+            showAlert(`Cambiado a sesión ${sessionName}`, 'success');
+        }
+        
+        // Función para actualizar la apariencia de los botones de sesión
+        function updateSessionButtons() {
+            sessionSwitchBtns.forEach(btn => {
+                const session = btn.getAttribute('data-session');
+                if (session === currentSession) {
+                    btn.classList.add('active');
+                    btn.classList.remove('inactive');
+                } else {
+                    btn.classList.remove('active');
+                    btn.classList.add('inactive');
+                }
+            });
+        }
+        
         // ========== FIN FUNCIONES CORREGIDAS ==========
         
         // Inicialización
@@ -1828,6 +1902,9 @@
             
             // Configurar fecha de pago como la fecha actual
             document.getElementById('payment-date').value = today;
+            
+            // Configurar método de pago predeterminado como efectivo
+            document.getElementById('payment-method').value = 'cash';
             
             // Configurar selector de fecha del historial de pagos
             paymentHistoryDateInput.value = today;
@@ -1883,6 +1960,24 @@
                             paymentClientSearch.value = `${client.firstName} ${client.lastName}`;
                             paymentClient.value = client.id;
                             clientSuggestions.style.display = 'none';
+                            
+                            // ESTA ES LA PARTE NUEVA: Establecer monto según tipo de membresía
+                            let defaultAmount = 0;
+                            if (client.membershipType === 'daily') {
+                                defaultAmount = 3000;
+                            } else if (client.membershipType === 'monthly') {
+                                defaultAmount = 55000;
+                            } else if (client.membershipType === 'weekly') {
+                                // Para clientes semanales, no hay monto predeterminado, dejamos 0
+                                defaultAmount = 0;
+                            }
+                            
+                            // Formatear el monto con separadores de miles
+                            if (defaultAmount > 0) {
+                                document.getElementById('payment-amount').value = defaultAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                            } else {
+                                document.getElementById('payment-amount').value = '';
+                            }
                         });
                         
                         clientSuggestions.appendChild(suggestion);
@@ -1996,6 +2091,14 @@
                 }
             });
             
+            // Event listeners para los botones de cambio de sesión
+            sessionSwitchBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const session = this.getAttribute('data-session');
+                    switchSession(session);
+                });
+            });
+            
             // Inicializar la actualización diaria del historial de pagos
             initializePaymentHistoryUpdate();
         });
@@ -2027,20 +2130,6 @@
             return parseInt(value.replace(/\./g, ''));
         }
         
-        // Verificar si es un nuevo día para reiniciar los ingresos
-        function checkDailyReset() {
-            const today = getCurrentDateString();
-            
-            // Si la fecha ha cambiado, reiniciamos los ingresos
-            if (today !== lastResetDate) {
-                lastResetDate = today;
-                localStorage.setItem('macggym_last_reset_date', lastResetDate);
-                
-                // Actualizar reportes para reflejar el cambio
-                updateReports();
-            }
-        }
-        
         // Abrir sesión seleccionada
         function openSession(session) {
             currentSession = session;
@@ -2051,6 +2140,7 @@
             managementScreen.style.display = 'block';
             
             // Actualizar la visualización de la sesión
+            updateSessionButtons();
             updateSessionDisplay();
             
             // Inicializar datos
@@ -2059,13 +2149,6 @@
             updateAttendanceClientSelect();
             updateReports();
             updateLastUpdateTime();
-        }
-        
-        // Cambiar de sesión
-        function changeSession() {
-            // Volver a la pantalla de selección de sesión
-            sessionSelectionScreen.style.display = 'flex';
-            managementScreen.style.display = 'none';
         }
         
         // Navegación por pestañas
@@ -2097,16 +2180,11 @@
             const sessionName = currentSession === 'morning' ? 'Mañana' : 'Tarde';
             const sessionTime = currentSession === 'morning' ? '5:00 AM - 10:00 AM' : '4:00 PM - 9:30 PM';
             const sessionIcon = currentSession === 'morning' ? 'fa-sun' : 'fa-moon';
-            const sessionClass = currentSession === 'morning' ? 'session-morning-info' : 'session-afternoon-info';
-            
-            // Actualizar header
-            sessionDisplay.className = `session-info ${sessionClass}`;
-            sessionDisplay.innerHTML = `<i class="fas ${sessionIcon}"></i> <span>Sesión ${sessionName}: ${sessionTime}</span>`;
             
             // Actualizar formulario de registro
-            currentSessionDisplay.className = `session-info ${sessionClass}`;
-            currentSessionDisplay.style.justifyContent = 'center';
-            currentSessionDisplay.innerHTML = `<i class="fas ${sessionIcon}"></i> ${sessionName} (${sessionTime})`;
+            const currentSessionDisplay = document.getElementById('current-session-display');
+            currentSessionDisplay.innerHTML = `<i class="fas ${sessionIcon}"></i> Sesión ${sessionName} (${sessionTime})`;
+            currentSessionDisplay.className = `session-time ${currentSession === 'morning' ? 'session-morning' : 'session-afternoon'}`;
             
             // Actualizar labels en las pestañas
             sessionClientsLabel.textContent = sessionName;
@@ -2117,14 +2195,26 @@
             sessionExpiringLabel.textContent = sessionName;
         }
         
-        // Registrar nuevo cliente
+        // Registrar nuevo cliente con validación de duplicados
         clientForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
             const sessionType = currentSession;
             const membershipTypeValue = document.getElementById('membershipType').value;
+            
+            // Verificar si el cliente ya existe
+            const existingClient = clients.find(client => 
+                client.firstName.toLowerCase() === firstName.toLowerCase() &&
+                client.lastName.toLowerCase() === lastName.toLowerCase() &&
+                client.sessionType === currentSession
+            );
+            
+            if (existingClient) {
+                showAlert('Este cliente ya está registrado en esta sesión', 'error');
+                return;
+            }
             
             let startDate = null;
             let dueDate = null;
@@ -2178,7 +2268,7 @@
             document.getElementById('daysToPay').value = '1';
         });
         
-        // Registrar pago
+        // Registrar pago con validación de duplicados
         paymentForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -2195,6 +2285,17 @@
             
             if (amount <= 0) {
                 showAlert('Por favor ingrese un monto válido', 'error');
+                return;
+            }
+            
+            // Verificar si ya existe un pago para este cliente hoy
+            const existingPayment = payments.find(p => 
+                p.clientId === clientId && 
+                p.paymentDate === paymentDate
+            );
+            
+            if (existingPayment) {
+                showAlert('Este cliente ya tiene un pago registrado para esta fecha', 'warning');
                 return;
             }
             
@@ -2215,8 +2316,9 @@
             showAlert('Pago registrado exitosamente', 'success');
             paymentForm.reset();
             
-            // Restablecer fecha de pago a hoy usando nuestra función corregida
+            // Restablecer valores predeterminados
             document.getElementById('payment-date').value = getCurrentDateString();
+            document.getElementById('payment-method').value = 'cash'; // ESTA LÍNEA ES NUEVA
             paymentClientSearch.value = '';
             paymentClient.value = '';
         });
@@ -2670,128 +2772,6 @@
                 attendanceHistory.appendChild(item);
             });
         }
-        
-        // Función mejorada para descargar el historial de pagos
-        function downloadPaymentHistory() {
-            try {
-                // Filtrar pagos por la sesión actual
-                const sessionPayments = payments.filter(p => p.sessionType === currentSession);
-                
-                if (sessionPayments.length === 0) {
-                    showAlert('No hay pagos para descargar', 'error');
-                    return;
-                }
-                
-                // Crear contenido CSV
-                let csvContent = "Cliente,Monto,Método de Pago,Fecha\n";
-                
-                sessionPayments.forEach(payment => {
-                    const client = clients.find(c => c.id === payment.clientId);
-                    if (!client) return;
-                    
-                    const clientName = `${client.firstName} ${client.lastName}`;
-                    const amount = formatNumber(payment.amount);
-                    const method = payment.paymentMethod === 'cash' ? 'Efectivo' : 'Banco';
-                    const date = formatDateForCSV(payment.paymentDate);
-                    
-                    csvContent += `"${clientName}",${amount},"${method}","${date}"\n`;
-                });
-                
-                // Crear y descargar el archivo
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                
-                // Crear enlace de descarga
-                const link = document.createElement('a');
-                link.href = url;
-                
-                // Nombre del archivo con fecha actual
-                const today = new Date();
-                const dateString = `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-                link.download = `historial_pagos_${currentSession}_${dateString}.csv`;
-                
-                // Agregar el enlace al DOM temporalmente
-                document.body.appendChild(link);
-                
-                // Simular clic en el enlace
-                if (document.createEvent) {
-                    // Método estándar para navegadores modernos
-                    const event = document.createEvent('MouseEvents');
-                    event.initEvent('click', true, true);
-                    link.dispatchEvent(event);
-                } else {
-                    // Método alternativo para navegadores más antiguos
-                    link.click();
-                }
-                
-                // Limpiar después de la descarga
-                setTimeout(() => {
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
-                }, 100);
-                
-                showAlert('Historial de pagos descargado exitosamente', 'success');
-                
-            } catch (error) {
-                console.error('Error al descargar el historial:', error);
-                
-                // Método alternativo si el método principal falla
-                try {
-                    // Abrir el contenido en una nueva ventana para copiar manualmente
-                    const sessionPayments = payments.filter(p => p.sessionType === currentSession);
-                    if (sessionPayments.length === 0) return;
-                    
-                    let csvContent = "Cliente,Monto,Método de Pago,Fecha\n";
-                    
-                    sessionPayments.forEach(payment => {
-                        const client = clients.find(c => c.id === payment.clientId);
-                        if (!client) return;
-                        
-                        const clientName = `${client.firstName} ${client.lastName}`;
-                        const amount = formatNumber(payment.amount);
-                        const method = payment.paymentMethod === 'cash' ? 'Efectivo' : 'Banco';
-                        const date = formatDateForCSV(payment.paymentDate);
-                        
-                        csvContent += `"${clientName}",${amount},"${method}","${date}"\n`;
-                    });
-                    
-                    // Abrir en nueva ventana
-                    const newWindow = window.open('', '_blank');
-                    newWindow.document.write(`
-                        <html>
-                            <head>
-                                <title>Historial de Pagos MACGGYM</title>
-                                <style>
-                                    body { font-family: Arial, sans-serif; padding: 20px; }
-                                    pre { background: #f5f5f5; padding: 15px; border-radius: 5px; }
-                                    button { padding: 10px 15px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0; }
-                                </style>
-                            </head>
-                            <body>
-                                <h2>Historial de Pagos MACGGYM - Sesión ${currentSession === 'morning' ? 'Mañana' : 'Tarde'}</h2>
-                                <p>Copie el siguiente contenido y guárdelo como archivo CSV:</p>
-                                <pre>${csvContent}</pre>
-                                <button onclick="window.print()">Imprimir</button>
-                                <button onclick="window.close()">Cerrar</button>
-                            </body>
-                        </html>
-                    `);
-                    newWindow.document.close();
-                    
-                    showAlert('Se abrió una ventana con el historial para copiar manualmente', 'success');
-                } catch (fallbackError) {
-                    console.error('Error en método alternativo:', fallbackError);
-                    showAlert('Error al descargar el historial. Intente nuevamente.', 'error');
-                }
-            }
-        }
-        
-        // Función auxiliar para formatear fecha para CSV
-        function formatDateForCSV(dateString) {
-            const date = new Date(dateString + 'T00:00:00');
-            return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth()+1).toString().padStart(2, '0')}/${date.getFullYear()}`;
-        }
     </script>
 </body>
 </html>
-
